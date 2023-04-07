@@ -1,9 +1,11 @@
 programa
 {
-	inteiro quartos[20], opcao = 100, totalc, totali, totalp
+	inteiro quartos[20], opcao = 100, totalc, totali, totalp
+	cadeia dadosi[20][2]
 	cadeia dadosc[1000][3]
 	funcao inicio()
 	{
+		zerar()
 		enquanto (opcao != 5) {
 			
 			se (opcao == 1) {
@@ -35,13 +37,24 @@ programa
 			limpa()
 				}
 		}
+	funcao zerar() {
+		para(inteiro i=0; i < 20; i++) {
+			quartos[i] = 0
+			}
+		}
+	funcao internacao(inteiro v[]) {
+		
+		}
+	funcao consulta() {
+		
+		}
 }
 /* $$$ Portugol Studio $$$ 
  * 
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 378; 
+ * @POSICAO-CURSOR = 819; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
