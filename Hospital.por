@@ -23,11 +23,15 @@ programa
 			}
 	}
 	funcao menu() {
-		escreva("\n 1 --> Consulta Ambulatorial.")
-		escreva("\n 2 --> Internação.")
-		escreva("\n 3 --> Listar Quartos.")
-		escreva("\n 4 --> Faturamento")
-		escreva("\n 5 --> Sair\n")
+		escreva("      HOSPITAL - XPTO\n\n")
+		escreva("-----------------------------\n")
+		escreva("1 --> Consulta Ambulatorial.")
+		escreva("\n2 --> Internação.")
+		escreva("\n3 --> Listar Quartos.")
+		escreva("\n4 --> Faturamento")
+		escreva("\n5 --> Sair\n")
+		escreva("-----------------------------\n\n")
+		escreva("Digite a opção: ")
 		leia(opcao)
 		limpa()
 		enquanto (opcao > 5 ou opcao <= 0) {
@@ -42,9 +46,15 @@ programa
 			quartos[i] = 0
 			}
 		}
-	funcao internacao(inteiro v[]) {
-		
+	funcao internacao(inteiro v[]){
+		inteiro o
+		escreva("Qual quarto deseja reservar:")
+		leia(o)
+		enquanto (o > 20 ou o < 0) {
+			
+			}
 		}
+	
 	funcao consulta() {
 		
 		}
@@ -54,7 +64,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 819; 
+ * @POSICAO-CURSOR = 1040; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
