@@ -28,7 +28,7 @@ programa
 				}
 			}
 	}
-	funcao menu() {
+	funcao menu() { // Função do menu interativo
 		escreva("\n      HOSPITAL - XPTO\n\n")
 		escreva("-----------------------------\n")
 		escreva("1 --> Consulta Ambulatorial.")
@@ -49,16 +49,16 @@ programa
 			limpa()
 				}
 		}
-	funcao zerar() {
+	funcao zerar() { // Função que atribui valor 0 a todos os espaços do vetor "quartos"
 		para(inteiro i=0; i < 20; i++) {
 			quartos[i] = 0
 			}
 		}
-	funcao internacao(){
+	funcao internacao(){ // Função interativa que reserva um quarto para internação
 		inteiro o = 0
 		escreva("Qual quarto deseja reservar:")
 		leia(o)
-		enquanto (o > 20 ou o - 1 < 0) {
+		enquanto (o > 20 ou o - 1 < 0) { // O "o - 1" foi posto pra fazer a indexagem 1, 20
 			escreva("Número de quarto inválido!\n")
 			escreva("Por favor, digite novamente:\n")
 			leia(o)
@@ -81,7 +81,7 @@ programa
 			}
 		}
 	
-	funcao listar_quartos() {
+	funcao listar_quartos() { // Função que lista os quartos
 		para (inteiro i=0; i < 20; i++) {
 			escreva(quartos[i], " ")
 			se ((i + 1)%5 == 0) {
@@ -89,7 +89,7 @@ programa
 		}
 	  }
    }
-   	funcao fatura() {
+   	funcao fatura() { // Função que faz um relatório das consultas, internações e arrecadações
    		escreva("\nNúmero de consultas tipo 'pediatria': ", totalp, "\n")
    		escreva("Número de consultas tipo 'outro': ", totalc, "\n")
    		escreva("Número total de consultas: ", totalc + totalp, "\n")
@@ -100,7 +100,7 @@ programa
    		escreva("---------------------------------------\n")
    		escreva("Total geral arrecadado: R$", (totalc * 120) + (totalp * 150) + (totali * 500), ",00", "\n")
    		}
-   	funcao consulta() {
+   	funcao consulta() { // Função interativa que registra uma consulta
    		cadeia nome, numero
    		inteiro tipo
    		escreva("Digite o nome do paciente:\n")
@@ -132,9 +132,9 @@ programa
    			escreva("Consulta Registrada!\n")
    			}
    		}
-   	funcao listar_internados() {
+   	funcao listar_internados() { // Função que lista os internados registrados no "dadosi"
    		inteiro c = 0
-   		para(inteiro i=0; i < 20; i++) {
+   		para(inteiro i=0; i < 20; i++) { 
    			se (quartos[i] == 1) {
    				escreva("Quarto: ", i + 1, "\n")
    				escreva("Paciente: ", dadosi[i][0], "\n")
@@ -145,7 +145,7 @@ programa
    			}
    		escreva("Existem ", 20 - c, " vagas disponíveis.\n")
    		}
-   	funcao listar_consultas() {
+   	funcao listar_consultas() { // Função que lista as consultas registradas no "dadosc"
    		para(inteiro i=0; i < totalc + totalp; i++) {
    			escreva("Paciente: ", dadosc[i][0], "\n")
    			escreva("Número: ", dadosc[i][1], "\n")
@@ -159,7 +159,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 3574; 
+ * @POSICAO-CURSOR = 1587; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
