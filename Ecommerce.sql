@@ -1,5 +1,5 @@
 CREATE TABLE Categorias (
-    codigo INT PRIMARY KEY,
+    codigo smallint PRIMARY KEY,
     nome VARCHAR(50),
     descricao VARCHAR(100)
 );
@@ -11,7 +11,7 @@ CREATE TABLE Produtos (
     quantidade INT,
     data_fabricacao DATE,
     valor_unit DECIMAL(10,2),
-    fk_categoria INT,
+    fk_categoria smallint,
     FOREIGN KEY (fk_categoria)
         REFERENCES Categorias (codigo)
         ON DELETE RESTRICT
