@@ -19,10 +19,10 @@ CREATE TABLE Produtos (
 
 CREATE TABLE Clientes (
     codigo INT PRIMARY KEY,
-    nome_completo VARCHAR(100),
-    nome_usuario VARCHAR(50),
-    email VARCHAR(100) UNIQUE,
-    cpf VARCHAR(11) UNIQUE,
+    nome_completo VARCHAR(80),
+    nome_usuario VARCHAR(25),
+    email VARCHAR(50) UNIQUE,
+    cpf VARCHAR(14) UNIQUE,
     data_nascimento DATE,
     endereco VARCHAR(120)
 );
