@@ -43,6 +43,6 @@ CREATE TABLE Pedidos (
 
 CREATE TABLE Funcionarios (
     codigo INT PRIMARY KEY NOT NULL,
-    nome VARCHAR(50),
+    nome VARCHAR(50) DEFAULT 'Sem nome.',
     cpf VARCHAR(14) UNIQUE NOT NULL
 );
