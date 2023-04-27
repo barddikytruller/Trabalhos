@@ -1,0 +1,167 @@
+/*
+-- CRIAÇÃO E POPULAÇÃO DA TABELA
+
+CREATE TABLE categoria (
+    codigo_categoria serial PRIMARY KEY NOT NULL,
+    nome_categoria VARCHAR(60) DEFAULT 'Sem nome.',
+    descricao_categoria VARCHAR(100) DEFAULT 'Sem descrição.'
+);
+
+CREATE TABLE produto (
+    codigo_produto INT PRIMARY KEY NOT NULL,
+    nome_produto VARCHAR(60) NOT NULL,
+    descricao_produto VARCHAR(100) DEFAULT 'Sem descrição.',
+    quantidade_produto INT DEFAULT 0,
+    data_fabricacao_produto DATE DEFAULT NULL,
+    valor_unit_produto DECIMAL(10,2) DEFAULT 0,
+    fk_codigo_categoria smallint NOT NULL,
+    FOREIGN KEY (fk_codigo_categoria)
+        REFERENCES categoria (codigo_categoria)
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE cliente (
+    codigo_cliente serial PRIMARY KEY NOT NULL,
+    nome_completo_cliente VARCHAR(60) NOT NULL,
+    nome_usuario_cliente VARCHAR(25) UNIQUE NOT NULL,
+    email_cliente VARCHAR(50) UNIQUE NOT NULL,
+    cpf_cliente VARCHAR(14) UNIQUE NOT NULL,
+    data_nascimento_cliente DATE,
+    endereco_cliente VARCHAR(120)
+);
+
+CREATE TABLE pedido (
+    codigo_pedido serial PRIMARY KEY NOT NULL,
+    data_pedido DATE,
+    fk_codigo_cliente INT,
+    FOREIGN KEY (fk_codigo_cliente)
+        REFERENCES cliente (codigo_cliente)
+        ON DELETE RESTRICT
+);
+
+CREATE TABLE item_pedido (
+    codigo_item_pedido SERIAL PRIMARY KEY NOT NULL,
+    fk_codigo_pedido INT,
+    FOREIGN KEY (fk_codigo_pedido)
+        REFERENCES pedido (codigo_pedido)
+        ON DELETE CASCADE,
+    fk_codigo_produto INT,
+    FOREIGN KEY (fk_codigo_produto)
+        REFERENCES produto (codigo_produto)
+        ON DELETE RESTRICT,
+    quantidade_produto INT DEFAULT 1,
+    fk_valor_produto DECIMAL(10,2),
+    FOREIGN KEY (fk_valor_produto)
+        REFERENCES produto (valor_unit_produto)
+        ON DELETE RESTRICT,
+    valor_desconto DECIMAL(10,2) DEFAULT 0.0,
+    valor_total DECIMAL(10,2) GENERATED ALWAYS AS (((fk_valor_produto - (fk_valor_produto * valor_desconto)) * quantidade_produto)) STORED
+);
+
+CREATE TABLE funcionario (
+    codigo_funcionario SERIAL PRIMARY KEY NOT NULL,
+    nome_funcionario VARCHAR(60) DEFAULT 'Sem nome.',
+    cpf_funcionario VARCHAR(14) UNIQUE NOT NULL
+);
+
+
+INSERT INTO categoria (nome_categoria,descricao_categoria) VALUES ('TV','Televisores de todos os tipos.');
+INSERT INTO categoria (nome_categoria,descricao_categoria) VALUES ('Celular & Smartphone','Celulares e Smartphones de todos os modelos.');
+INSERT INTO categoria (nome_categoria,descricao_categoria) VALUES ('Periféricos','Periféricos eletrônicos.');
+INSERT INTO categoria (nome_categoria,descricao_categoria) VALUES ('Hardware','Hardware para computadores de mesa.');
+INSERT INTO categoria (nome_categoria,descricao_categoria) VALUES ('Tablets, iPads e E-readers','Aparelhos eletrônicos maiores e para maior praticidade.');
+
+SELECT * FROM categoria
+
+
+INSERT INTO produto (codigo_produto,nome_produto,descricao_produto,quantidade_produto,data_fabricacao_produto,valor_unit_produto,fk_codigo_categoria) VALUES (002,'Smart TV Samsung 43 Polegadas UHD 4K','Processador Crystal 4K, Tela sem limites, Alexa, Controle Único - UN43AU7700GXZD',500,'22-03-22',1929.99,1);
+INSERT INTO produto (codigo_produto,nome_produto,descricao_produto,quantidade_produto,data_fabricacao_produto,valor_unit_produto,fk_codigo_categoria) VALUES (003,'Smartphone Samsung Galaxy S20 FE 5G','6GB RAM, 128GB, Octa Core, Câmera Tripla 32MP',600,'20-02-21',1989,2);
+INSERT INTO produto (codigo_produto,nome_produto,descricao_produto,quantidade_produto,data_fabricacao_produto,valor_unit_produto,fk_codigo_categoria) VALUES (004,'Mouse Gamer Redragon Cobra','Chroma RGB, 12400DPI, 7 Botões, Preto - M711 V2',350,'08-01-22',109.99,3);
+INSERT INTO produto (codigo_produto,nome_produto,descricao_produto,quantidade_produto,data_fabricacao_produto,valor_unit_produto,fk_codigo_categoria) VALUES (005,'Processador AMD Ryzen 5 4600G, 3.7GHz','(4.2GHz Max Turbo), Cache 11MB, AM4, Vídeo Integrado - 100-100000147BOX',400,'16-02-21',569.99,4);
+INSERT INTO produto (codigo_produto,nome_produto,descricao_produto,quantidade_produto,data_fabricacao_produto,valor_unit_produto,fk_codigo_categoria) VALUES (001,'Tablet Samsung Galaxy A7 Lite 4G','32GB, Android 11, Tela de 8.7´, Grafite - SM-T225NZAPZTO',1000,'24-04-22',969,5);
+
+SELECT * FROM produto
+
+
+INSERT INTO cliente (nome_completo_cliente,nome_usuario_cliente,email_cliente,cpf_cliente,data_nascimento_cliente,endereco_cliente) VALUES ('Gabriel Barbosa Souza','GabrielBS','gabrielBsouza@gmail.com','86525189076','01-06-1989','Rua Frederico Damcke, 454, Duchas, Petrópolis, RJ.');
+INSERT INTO cliente (nome_completo_cliente,nome_usuario_cliente,email_cliente,cpf_cliente,data_nascimento_cliente,endereco_cliente) VALUES ('Lucas Iago Caleb Teixeira','LucasICaleb','lucascalebT@hotmail.com','74284161969','18-01-2000','Rua Doutor Sá Earp, 550, Morin, Petrópolis, RJ.');
+INSERT INTO cliente (nome_completo_cliente,nome_usuario_cliente,email_cliente,cpf_cliente,data_nascimento_cliente,endereco_cliente) VALUES ('Aline Rebeca Patrícia Barbosa','rebecaalineB','rebeca_alineB@outlook.com','55941588712','03-01-1995','Servidão Antônio Costa Malheiros, 790, Gloria, Petrópolis, RJ.');
+INSERT INTO cliente (nome_completo_cliente,nome_usuario_cliente,email_cliente,cpf_cliente,data_nascimento_cliente,endereco_cliente) VALUES ('Cláudia Agatha Rodrigues','claudiaAR','claudiaaAR286@gmail.com','31128804719','05-04-1999','Rua Clara Bailune Matuque, 803, Centro, Petrópolis, RJ.');
+INSERT INTO cliente (nome_completo_cliente,nome_usuario_cliente,email_cliente,cpf_cliente,data_nascimento_cliente,endereco_cliente) VALUES ('Mário Murilo Corte Real','marioM_cr','marioM_cr@hotmail.com','98522156787','24-03-1996','Rua Brigadeiro Godinho Santos, 249, Mosela, Petrópolis, RJ.');
+
+SELECT * FROM cliente
+
+
+INSERT INTO funcionario (nome_funcionario,cpf_funcionario) VALUES ('Clara Luana','42784320707');
+INSERT INTO funcionario (nome_funcionario,cpf_funcionario) VALUES ('Renan Melo','80741918973');
+INSERT INTO funcionario (nome_funcionario,cpf_funcionario) VALUES ('Tereza Rezende','53231492726');
+INSERT INTO funcionario (nome_funcionario,cpf_funcionario) VALUES ('Rebeca Lorena Betina','25332752717');
+INSERT INTO funcionario (nome_funcionario,cpf_funcionario) VALUES ('Kamilly Carolina Clara Costa','00534244769');
+
+SELECT * FROM funcionario
+
+
+INSERT INTO pedido (fk_codigo_produto,data_pedido,quantidade_pedido,fk_codigo_cliente) VALUES (1,'22-04-22',3,2);
+INSERT INTO pedido (fk_codigo_produto,data_pedido,quantidade_pedido,fk_codigo_cliente) VALUES (5,'12-03-22',1,1);
+INSERT INTO pedido (fk_codigo_produto,data_pedido,quantidade_pedido,fk_codigo_cliente) VALUES (4,'01-04-22',2,3);
+INSERT INTO pedido (fk_codigo_produto,data_pedido,quantidade_pedido,fk_codigo_cliente) VALUES (3,'09-04-22',5,4);
+INSERT INTO pedido (fk_codigo_produto,data_pedido,quantidade_pedido,fk_codigo_cliente) VALUES (2,'29-04-22',2,5);
+
+SELECT * FROM pedido
+
+-- FIM DA CRIAÇÃO E POPULAÇÃO 
+
+*/
+
+-----------------------------
+/*
+-- COMANDOS SQL
+
+*Um comando SQL de atualização em algum registro em uma tabela (DML):
+
+	UPDATE pedido
+	SET quantidade_pedido = 4
+	WHERE codigo_pedido = 2; 
+
+	SELECT * FROM pedido
+
+*Um comando SQL de exclusão de algum registro em uma tabela (DML)
+
+	DELETE FROM pedido WHERE codigo_pedido = 1
+
+	SELECT * FROM pedido
+
+*Cinco SQLs de consulta
+
+	**Pelo menos 2 com algum tipo de junção
+	
+		SELECT P.nome_produto, P.quantidade_produto, P.valor_unit_produto, C.nome_categoria, C.descricao_categoria FROM produto P
+		INNER JOIN categoria C ON P.fk_codigo_categoria=C.codigo_categoria
+		
+		//
+		
+		SELECT C.nome_completo_cliente AS nome_cliente, C.cpf_cliente, P.codigo_pedido, P.data_pedido FROM cliente C
+		INNER JOIN pedido P ON C.codigo_cliente = P.fk_codigo_cliente
+		
+	**Pelo menos 1 com usando count() e group by()
+		
+		SELECT COUNT(codigo_produto) AS total_produtos FROM produto
+		
+		//
+		
+		SELECT COUNT(codigo_cliente) AS quantidade_clientes, nome_completo_cliente AS nome_cliente FROM cliente
+		GROUP BY nome_completo_cliente
+		
+	**Uma consulta livre
+		
+		SELECT codigo_produto,nome_produto,data_fabricacao_produto FROM produto
+		WHERE data_fabricacao_produto > '20-03-22'
+		
+	**1 SQL para construção de nota fiscal
+		
+		SELECT C.nome_usuario_cliente, C.cpf_cliente, P.data_pedido, PR.nome_produto,CA.nome_categoria AS categoria_produto, P.quantidade_pedido AS quantidade, PR.valor_unit_produto AS valor_unidade, P.quantidade_pedido * PR.valor_unit_produto AS total_pedido FROM pedido P
+		INNER JOIN cliente C ON P.fk_codigo_cliente = C.codigo_cliente
+		INNER JOIN produto PR ON PR.codigo_produto = P.fk_codigo_produto
+		INNER JOIN categoria CA ON CA.codigo_categoria = PR.fk_codigo_categoria
+		WHERE P.codigo_pedido = 'X' -- Troque o 'X' pelo codigo do pedido que você quer gerar a nota.
+*/
