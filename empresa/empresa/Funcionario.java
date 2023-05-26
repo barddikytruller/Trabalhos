@@ -1,6 +1,7 @@
 package empresa;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
@@ -29,8 +30,8 @@ public class Funcionario extends Pessoa implements Empresa {
 		
 	@Override
 	public String toString() {
-		return "Funcionario - Salario Bruto: " + salarioBruto + " | " + "CPF: " + cpf + " | "
-				+ "Nome:" + nome;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		return nome + ";" + cpf + ";" + dataNascimento.format(formatter) + ";" + salarioBruto;
 	}
 
 	public Double getSalarioBruto() {
@@ -102,12 +103,12 @@ public class Funcionario extends Pessoa implements Empresa {
 
 	@Override
 	public Double calculoINSS() {
-		return salarioBruto * INSS + deducaoINSS;
+		return salarioBruto * INSS - deducaoINSS;
 	}
 
 	@Override
 	public Double calculoIR() {
-		return ((salarioBruto - (calculoINSS() + descontoDependentes())) * IR) + deducaoIR;
+		return ((salarioBruto - (calculoINSS() + descontoDependentes())) * IR) - deducaoIR;
 	}
 
 }
