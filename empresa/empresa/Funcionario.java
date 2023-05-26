@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import empresa.Valores;
 
 public class Funcionario extends Pessoa implements Empresa {
 	private Double salarioBruto, INSS, IR, deducaoINSS, deducaoIR;
@@ -61,20 +62,22 @@ public class Funcionario extends Pessoa implements Empresa {
 	}
 	
 	private void INSS() {
-	    if (salarioBruto <= 1320.00) {
-	        INSS = 0.075;
-	        deducaoINSS = 0.0;
-	    } else if (salarioBruto > 1320.00 && salarioBruto < 2571.29) {
-	        INSS = 0.09;
-	        deducaoINSS = 19.80;
-	    } else if (salarioBruto >= 2571.29 && salarioBruto < 3856.90) {
-	        INSS = 0.12;
-	        deducaoINSS = 96.94;
-	    } else {
-	        INSS = 0.14;
-	        deducaoINSS = 174.08;
-	    }
-	}
+        if (salarioBruto <= 1320.00) {
+            INSS = 0.075;
+            deducaoINSS = 0.0;
+        } else if (salarioBruto  >= 1320.01 && salarioBruto <= 2571.29) {
+            INSS = 0.09;
+            deducaoINSS = 19.80;
+        } else if (salarioBruto >= 2571.30 && salarioBruto <= 3856.90) {
+            INSS = 0.12;
+            deducaoINSS = 96.94;
+        } else if (salarioBruto >= 3856.95 && salarioBruto <= 7507.49){
+            INSS = 0.14;
+            deducaoINSS = 174.08;
+        } else {
+                   //Obs.: Salário acima de R$ 7507,49 deve ser aplicado o valor de 14% sobre R$ 7507,49
+       }
+    }
 	
 	private void IR() {
 		var c = (salarioBruto - (salarioBruto * INSS)) - descontoDependentes();
@@ -110,6 +113,7 @@ public class Funcionario extends Pessoa implements Empresa {
 	public Double calculoIR() {
 		return ((salarioBruto - (calculoINSS() + descontoDependentes())) * IR) - deducaoIR;
 	}
+	
 
 }
 

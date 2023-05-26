@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public class TesteFuncionario {
 
-	public static void main(String[] args) {
-		Dependente dependente01 = new Dependente("Artur", "00345693475", LocalDate.of(2004, 7, 13), Parentesco.FILHO);
+	public static void main(String[] args) throws DependenteException {
+		Dependente dependente01 = new Dependente("Artur", "00345693475", LocalDate.of(2010, 7, 13), Parentesco.FILHO);
 		Dependente dependente02 = new Dependente("Caio", "49687012346", LocalDate.of(2010, 2, 19), Parentesco.FILHO);
 		
 		List<Dependente> dependentes = new ArrayList<>();
