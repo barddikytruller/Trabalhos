@@ -9,7 +9,6 @@ public class Dependente extends Pessoa {
 	Parentesco parentesco;
 	private static Set<String> cpfsCadastrados = new HashSet<>();
 	
-
 	public Dependente(String nome, String cpf, LocalDate dataNascimento, Parentesco parentesco) throws DependenteException {
 		super(nome, cpf, dataNascimento);
 		validarDependente();
@@ -38,12 +37,12 @@ public class Dependente extends Pessoa {
 	}
 	
 	private void validarDependente() throws DependenteException {
-	       LocalDate dataAtual = LocalDate.now();
-	       Period periodo = Period.between(dataNascimento, dataAtual);
-	       int idade = periodo.getYears();
-	       if (idade > 18) {
-	    	   throw new DependenteException("");
-	       }
+        LocalDate dataAtual = LocalDate.now();
+        Period periodo = Period.between(dataNascimento, dataAtual);
+        int idade = periodo.getYears();
+        if (idade >= 18) {
+            throw new DependenteException("O dependente tem 18 anos ou mais.");
+        }
     }
 	
 }
