@@ -43,6 +43,9 @@ public class Dependente extends Pessoa {
         if (idade >= 18) {
             throw new DependenteException("O dependente tem 18 anos ou mais.");
         }
+        if (cpfsCadastrados.contains(cpf)) {
+        	throw new DependenteException("Esse cpf já existe no sistema");
+        }
     }
 	
 }
