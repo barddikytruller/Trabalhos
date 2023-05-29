@@ -59,21 +59,25 @@ public class Funcionario extends Pessoa implements Empresa {
 		
 	}
 	
-	private void INSS() {
+	private Boolean INSS() {
         if (salarioBruto <= Valores.inssTETO1.getValor()) {
             INSS = Valores.inssALIQUOTA1.getValor();
             deducaoINSS = Valores.inssDEDUCAO1.getValor();
+            return false;
         } else if (salarioBruto  >= Valores.inssTETO1.getValor() + 0.01 && salarioBruto <= Valores.inssTETO2.getValor()) {
             INSS = Valores.inssALIQUOTA2.getValor();
             deducaoINSS = Valores.inssDEDUCAO2.getValor();
+            return false;
         } else if (salarioBruto >= Valores.inssTETO2.getValor() + 0.01 && salarioBruto <= Valores.inssTETO3.getValor()) {
             INSS = Valores.inssALIQUOTA3.getValor();
             deducaoINSS = Valores.inssDEDUCAO3.getValor();
+            return false;
         } else if (salarioBruto >= Valores.inssTETO3.getValor() + 0.01 && salarioBruto <= Valores.inssTETO4.getValor()){
             INSS = Valores.inssALIQUOTA4.getValor();
             deducaoINSS = Valores.inssDEDUCAO4.getValor();
+            return false;
         } else {
-                   //Obs.: Salário acima de R$ 7507,49 deve ser aplicado o valor de 14% sobre R$ 7507,49
+            return true;       //Obs.: Salário acima de R$ 7507,49 deve ser aplicado o valor de 14% sobre R$ 7507,49
        }
     }
 	
@@ -104,6 +108,10 @@ public class Funcionario extends Pessoa implements Empresa {
 
 	@Override
 	public Double calculoINSS() {
+		
+		if (INSS()) {
+			return Valores.inssTETO4.getValor() * INSS - deducaoINSS;
+		}
 		return salarioBruto * INSS - deducaoINSS;
 	}
 
