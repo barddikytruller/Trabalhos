@@ -15,17 +15,16 @@ public class Funcionario extends Pessoa implements Empresa {
 	private static List<Funcionario> funcionariosCadastrados = new ArrayList<>();
 	private static Set<String> cpfsCadastrados = new HashSet<>();
 
-	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto, List<Dependente> dependentes) throws FuncionarioException {
-		super(nome, cpf, dataNascimento);
-		validarFuncionario();
-		
-		this.salarioBruto = salarioBruto;
-		this.dependentes = dependentes;
-		cpfsCadastrados.add(cpf);
-		INSS();
-		IR();
-		funcionariosCadastrados.add(this);
-}
+	public Funcionario(String nome, String cpf, LocalDate dataNascimento, Double salarioBruto, Dependente dependente) throws FuncionarioException {
+		 super(nome, cpf, dataNascimento);
+	        validarFuncionario();
+	        this.salarioBruto = salarioBruto;
+	        dependentes.add(dependente);
+	        cpfsCadastrados.add(cpf);
+	        INSS();
+	        IR();
+	        funcionariosCadastrados.add(this);
+	    }
 		
 	@Override
 	public String toString() {
@@ -36,7 +35,10 @@ public class Funcionario extends Pessoa implements Empresa {
 	public Double getSalarioBruto() {
 		return salarioBruto;
 	}
-
+	
+	public List<Dependente> getDependentes() {
+		return this.dependentes;
+	}
 	
 	public Double salarioLiq() {
 		
