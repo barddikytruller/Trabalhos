@@ -1,0 +1,122 @@
+body {
+   margin: 0;
+   overflow: hidden;
+   background-color: black; /* Adiciona o fundo preto ao body */
+}
+
+#overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: transparent; /* Altera o background-color para transparent */
+   z-index: 9999;
+   opacity: 1;
+   pointer-events: none;
+   animation: revealOverlay 1s forwards;
+}
+
+@keyframes revealOverlay {
+   0% {
+       opacity: 1;
+   }
+   100% {
+       opacity: 0;
+   }
+}
+
+#background-image {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   opacity: 0;
+   pointer-events: none;
+   transition: opacity 1s;
+}
+
+body.reveal #background-image {
+   opacity: 1;
+}
+
+#press-f-text {
+   position: fixed;
+   font-family: monospace;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 24px;
+   font-weight: bold;
+   color: red;
+   animation: blinkText 1s infinite;
+}
+
+@keyframes blinkText {
+   0%, 49% {
+       opacity: 0;
+   }
+   50%, 100% {
+       opacity: 1;
+   }
+}
+
+#red-ball {
+   position: fixed;
+   top: 20px;
+   left: 20px;
+   width: 20px;
+   height: 20px;
+   background-color: red;
+   border-radius: 50%;
+   opacity: 0;
+   animation: blinkBall 1s infinite;
+}
+
+@keyframes blinkBall {
+   0%, 49% {
+       opacity: 0;
+   }
+   50%, 100% {
+       opacity: 1;
+   }
+}
+
+body.reveal #red-ball {
+   opacity: 1;
+}
+
+#rec-text-container {
+   position: fixed;
+   top: 20px;
+   left: 50px;
+   display: none;
+}
+
+body.reveal #rec-text-container {
+   display: block;
+}
+
+#rec-text {
+   color: red;
+   font-size: 16px;
+   font-weight: bold;
+   font-family: monospace;
+}
+
+#rec-timer-container {
+   display: none;
+   position: absolute;
+   top: 17px;
+   left: 100px;
+   color: red;
+   font-size: 14px;
+   font-family:'Courier New', Courier, monospace
+   
+}
+
+#timer {
+   margin-top: 5px;
+}
+
